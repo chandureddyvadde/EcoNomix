@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoNomix - Create Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Microsoft Brand Colors */
+            --ms-blue: #0078D4;
+            --ms-blue-light: #106EBE;
+            --ms-blue-dark: #005A9E;
+            --ms-blue-50: #F0F8FF;
+            --ms-blue-100: #E6F3FF;
+            --ms-blue-200: #CCE7FF;
+            --ms-blue-300: #99CFFF;
+            --ms-blue-400: #66B7FF;
+            --ms-blue-500: #339FFF;
+            --ms-blue-600: #0078D4;
+            --ms-blue-700: #005A9E;
+            --ms-blue-800: #004578;
+            --ms-blue-900: #003052;
+            
+            --ms-orange: #FF8C00;
+            --ms-orange-light: #FFA500;
+            --ms-orange-dark: #FF7F00;
+            --ms-orange-50: #FFF8F0;
+            --ms-orange-100: #FFF1E6;
+            --ms-orange-200: #FFE3CC;
+            --ms-orange-300: #FFC799;
+            --ms-orange-400: #FFAB66;
+            --ms-orange-500: #FF8C00;
+            --ms-orange-600: #E67E00;
+            --ms-orange-700: #CC7000;
+            --ms-orange-800: #B36200;
+            --ms-orange-900: #995400;
+            
+            --ms-gray-50: #FAFAFA;
+            --ms-gray-100: #F5F5F5;
+            --ms-gray-200: #EEEEEE;
+            --ms-gray-300: #E1E1E1;
+            --ms-gray-400: #C7C7C7;
+            --ms-gray-500: #8A8886;
+            --ms-gray-600: #605E5C;
+            --ms-gray-700: #484644;
+            --ms-gray-800: #323130;
+            --ms-gray-900: #201F1E;
+            --ms-white: #FFFFFF;
+            --ms-black: #000000;
+            --ms-green: #107C10;
+            --ms-red: #D13438;
+            --ms-purple: #8764B8;
+            --ms-teal: #00B294;
+            --ms-yellow: #FFB900;
+            
+            /* Gradient Backgrounds */
+            --ms-gradient-primary: linear-gradient(135deg, var(--ms-blue-600) 0%, var(--ms-blue-800) 100%);
+            --ms-gradient-secondary: linear-gradient(135deg, var(--ms-orange-500) 0%, var(--ms-orange-700) 100%);
+            --ms-gradient-hero: linear-gradient(135deg, var(--ms-blue-500) 0%, var(--ms-blue-700) 50%, var(--ms-orange-500) 100%);
+            --ms-gradient-card: linear-gradient(145deg, var(--ms-white) 0%, var(--ms-blue-50) 100%);
+            --ms-gradient-accent: linear-gradient(45deg, var(--ms-blue-400) 0%, var(--ms-orange-400) 100%);
+            --ms-gradient-dark: linear-gradient(135deg, var(--ms-blue-900) 0%, var(--ms-orange-900) 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--ms-gradient-hero);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .signup-container {
+            background: var(--ms-gradient-card);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 120, 212, 0.2);
+            border: 1px solid var(--ms-blue-200);
+            padding: 50px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .brand-subtitle {
+            color: #6b7280;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #ffffff;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-input.error {
+            border-color: #dc2626;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px;
+        }
+
+        .password-toggle-btn:hover {
+            color: #374151;
+        }
+
+        .password-strength {
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); width: 25%; }
+        .strength-fair { background: var(--ms-gradient-secondary); width: 50%; }
+        .strength-good { background: var(--ms-gradient-accent); width: 75%; }
+        .strength-strong { background: var(--ms-gradient-primary); width: 100%; }
+
+        .strength-text {
+            font-weight: 500;
+        }
+
+        .strength-weak-text { color: #dc2626; }
+        .strength-fair-text { color: #f59e0b; }
+        .strength-good-text { color: #10b981; }
+        .strength-strong-text { color: #059669; }
+
+        .terms-section {
+            background: var(--ms-gradient-card);
+            border: 2px solid var(--ms-blue-200);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .terms-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #667eea;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #374151;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .checkbox-label a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .captcha-section {
+            background: var(--ms-gradient-card);
+            border: 2px solid var(--ms-blue-200);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .captcha-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .captcha-box {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1f2937;
+            letter-spacing: 3px;
+            user-select: none;
+        }
+
+        .captcha-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .captcha-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .refresh-captcha {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 8px;
+            text-decoration: underline;
+        }
+
+        .refresh-captcha:hover {
+            color: #5a67d8;
+        }
+
+        .signup-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--ms-gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .signup-btn:hover {
+            background: var(--ms-gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 120, 212, 0.4);
+        }
+
+        .signup-btn:active {
+            transform: translateY(0);
+        }
+
+        .signup-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider-text {
+            padding: 0 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #16a34a;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .field-error {
+            color: #dc2626;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .field-error.show {
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .signup-container {
+                padding: 30px 25px;
+                margin: 10px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .brand-name {
+                font-size: 24px;
+            }
+            
+            .form-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo-section">
+            <div class="logo">
+                <img src="pic.jpg" alt="EcoNomix Logo">
+            </div>
+            <h1 class="brand-name">EcoNomix</h1>
+            <p class="brand-subtitle">Create your account to get started</p>
+        </div>
+
+        <div class="form-section">
+            <h2 class="form-title">Create Account</h2>
+            <p class="form-subtitle">Join thousands of businesses using EcoNomix for financial planning</p>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="signupForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">First Name</label>
+                        <input type="text" id="firstName" class="form-input" placeholder="Enter first name" required>
+                        <div class="field-error" id="firstNameError">First name is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">Last Name</label>
+                        <input type="text" id="lastName" class="form-input" placeholder="Enter last name" required>
+                        <div class="field-error" id="lastNameError">Last name is required</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                    <div class="field-error" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="company">Company Name</label>
+                    <input type="text" id="company" class="form-input" placeholder="Enter company name" required>
+                    <div class="field-error" id="companyError">Company name is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="Enter phone number" required>
+                    <div class="field-error" id="phoneError">Phone number is required</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="password" class="form-input" placeholder="Create a strong password" required>
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword('password')">👁️</button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-text" id="strengthText">Password strength</div>
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                    </div>
+                    <div class="field-error" id="passwordError">Password must be at least 8 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required>
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword('confirmPassword')">👁️</button>
+                    </div>
+                    <div class="field-error" id="confirmPasswordError">Passwords do not match</div>
+                </div>
+
+                <div class="terms-section">
+                    <div class="terms-title">Terms & Conditions</div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" class="checkbox" required>
+                        <label for="terms" class="checkbox-label">
+                            I agree to the <a href="#" onclick="showTerms()">Terms of Service</a> and <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="newsletter" class="checkbox">
+                        <label for="newsletter" class="checkbox-label">
+                            I would like to receive product updates and marketing emails
+                        </label>
+                    </div>
+                </div>
+
+                <div class="captcha-section">
+                    <div class="captcha-title">Security Verification</div>
+                    <div class="captcha-box" id="captchaBox">ABC123</div>
+                    <input type="text" id="captchaInput" class="captcha-input" placeholder="Enter the code above" required>
+                    <button type="button" class="refresh-captcha" onclick="generateCaptcha()">Refresh code</button>
+                </div>
+
+                <button type="submit" class="signup-btn" id="signupBtn">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="divider">
+                <span class="divider-text">or</span>
+            </div>
+
+            <div class="login-link">
+                Already have an account? <a href="login.html">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCaptcha = '';
+
+        // Generate random CAPTCHA
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            currentCaptcha = '';
+            for (let i = 0; i < 6; i++) {
+                currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('captchaBox').textContent = currentCaptcha;
+        }
+
+        // Toggle password visibility
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleBtn = passwordInput.nextElementSibling;
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        // Check password strength
+        function checkPasswordStrength(password) {
+            const strengthText = document.getElementById('strengthText');
+            const strengthFill = document.getElementById('strengthFill');
+            
+            let score = 0;
+            let strength = 'weak';
+            
+            if (password.length >= 8) score++;
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            
+            if (score < 2) {
+                strength = 'weak';
+                strengthText.textContent = 'Weak password';
+                strengthText.className = 'strength-text strength-weak-text';
+                strengthFill.className = 'strength-fill strength-weak';
+            } else if (score < 3) {
+                strength = 'fair';
+                strengthText.textContent = 'Fair password';
+                strengthText.className = 'strength-text strength-fair-text';
+                strengthFill.className = 'strength-fill strength-fair';
+            } else if (score < 4) {
+                strength = 'good';
+                strengthText.textContent = 'Good password';
+                strengthText.className = 'strength-text strength-good-text';
+                strengthFill.className = 'strength-fill strength-good';
+            } else {
+                strength = 'strong';
+                strengthText.textContent = 'Strong password';
+                strengthText.className = 'strength-text strength-strong-text';
+                strengthFill.className = 'strength-fill strength-strong';
+            }
+            
+            return strength;
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Hide messages
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Show field error
+        function showFieldError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            const errorDiv = document.getElementById(fieldId + 'Error');
+            
+            field.classList.add('error');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        // Hide field error
+        function hideFieldError(fieldId) {
+            const field = document.getElementById(fieldId);
+            const errorDiv = document.getElementById(fieldId + 'Error');
+            
+            field.classList.remove('error');
+            errorDiv.classList.remove('show');
+        }
+
+        // Validate email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Validate phone
+        function validatePhone(phone) {
+            const re = /^[\+]?[1-9][\d]{0,15}$/;
+            return re.test(phone.replace(/\s/g, ''));
+        }
+
+        // Show terms/privacy (placeholder)
+        function showTerms() {
+            alert('Terms of Service would be displayed here. This is a demo application.');
+        }
+
+        function showPrivacy() {
+            alert('Privacy Policy would be displayed here. This is a demo application.');
+        }
+
+        // Handle form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const captcha = document.getElementById('captchaInput').value;
+            const terms = document.getElementById('terms').checked;
+            const signupBtn = document.getElementById('signupBtn');
+
+            // Hide previous messages and errors
+            hideMessages();
+            ['firstName', 'lastName', 'email', 'company', 'phone', 'password', 'confirmPassword'].forEach(hideFieldError);
+
+            let hasErrors = false;
+
+            // Validate fields
+            if (!firstName) {
+                showFieldError('firstName', 'First name is required');
+                hasErrors = true;
+            }
+
+            if (!lastName) {
+                showFieldError('lastName', 'Last name is required');
+                hasErrors = true;
+            }
+
+            if (!email || !validateEmail(email)) {
+                showFieldError('email', 'Please enter a valid email address');
+                hasErrors = true;
+            }
+
+            if (!company) {
+                showFieldError('company', 'Company name is required');
+                hasErrors = true;
+            }
+
+            if (!phone || !validatePhone(phone)) {
+                showFieldError('phone', 'Please enter a valid phone number');
+                hasErrors = true;
+            }
+
+            if (!password || password.length < 8) {
+                showFieldError('password', 'Password must be at least 8 characters');
+                hasErrors = true;
+            }
+
+            if (password !== confirmPassword) {
+                showFieldError('confirmPassword', 'Passwords do not match');
+                hasErrors = true;
+            }
+
+            if (!terms) {
+                showError('You must agree to the Terms of Service and Privacy Policy');
+                hasErrors = true;
+            }
+
+            // Validate CAPTCHA
+            if (captcha.toUpperCase() !== currentCaptcha) {
+                showError('Invalid security code. Please try again.');
+                generateCaptcha();
+                hasErrors = true;
+            }
+
+            if (hasErrors) {
+                return;
+            }
+
+            // Disable button during processing
+            signupBtn.disabled = true;
+            signupBtn.textContent = 'Creating Account...';
+
+            // Simulate account creation delay
+            setTimeout(() => {
+                // Store user data in localStorage (for demo purposes)
+                const userData = {
+                    firstName,
+                    lastName,
+                    email,
+                    company,
+                    phone,
+                    signupDate: new Date().toISOString()
+                };
+                
+                localStorage.setItem('ecoNomixUserData', JSON.stringify(userData));
+                
+                // Store authentication in sessionStorage
+                sessionStorage.setItem('cfoHelperAuthenticated', 'true');
+                sessionStorage.setItem('cfoHelperUser', email);
+                sessionStorage.setItem('cfoHelperLoginTime', new Date().toISOString());
+                
+                showSuccess('Account created successfully! Redirecting to dashboard...');
+                
+                // Redirect to main application
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                
+                // Re-enable button
+                signupBtn.disabled = false;
+                signupBtn.textContent = 'Create Account';
+            }, 3000);
+        });
+
+        // Real-time validation
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            checkPasswordStrength(password);
+            
+            if (password.length >= 8) {
+                hideFieldError('password');
+            } else {
+                showFieldError('password', 'Password must be at least 8 characters');
+            }
+        });
+
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password === confirmPassword) {
+                hideFieldError('confirmPassword');
+            } else if (confirmPassword) {
+                showFieldError('confirmPassword', 'Passwords do not match');
+            }
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value.trim();
+            if (email && !validateEmail(email)) {
+                showFieldError('email', 'Please enter a valid email address');
+            } else {
+                hideFieldError('email');
+            }
+        });
+
+        // Initialize CAPTCHA on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCaptcha();
+            
+            // Check if already authenticated
+            if (sessionStorage.getItem('cfoHelperAuthenticated') === 'true') {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

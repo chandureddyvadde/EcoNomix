@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoNomix - Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Microsoft Brand Colors */
+            --ms-blue: #0078D4;
+            --ms-blue-light: #106EBE;
+            --ms-blue-dark: #005A9E;
+            --ms-blue-50: #F0F8FF;
+            --ms-blue-100: #E6F3FF;
+            --ms-blue-200: #CCE7FF;
+            --ms-blue-300: #99CFFF;
+            --ms-blue-400: #66B7FF;
+            --ms-blue-500: #339FFF;
+            --ms-blue-600: #0078D4;
+            --ms-blue-700: #005A9E;
+            --ms-blue-800: #004578;
+            --ms-blue-900: #003052;
+            
+            --ms-orange: #FF8C00;
+            --ms-orange-light: #FFA500;
+            --ms-orange-dark: #FF7F00;
+            --ms-orange-50: #FFF8F0;
+            --ms-orange-100: #FFF1E6;
+            --ms-orange-200: #FFE3CC;
+            --ms-orange-300: #FFC799;
+            --ms-orange-400: #FFAB66;
+            --ms-orange-500: #FF8C00;
+            --ms-orange-600: #E67E00;
+            --ms-orange-700: #CC7000;
+            --ms-orange-800: #B36200;
+            --ms-orange-900: #995400;
+            
+            --ms-gray-50: #FAFAFA;
+            --ms-gray-100: #F5F5F5;
+            --ms-gray-200: #EEEEEE;
+            --ms-gray-300: #E1E1E1;
+            --ms-gray-400: #C7C7C7;
+            --ms-gray-500: #8A8886;
+            --ms-gray-600: #605E5C;
+            --ms-gray-700: #484644;
+            --ms-gray-800: #323130;
+            --ms-gray-900: #201F1E;
+            --ms-white: #FFFFFF;
+            --ms-black: #000000;
+            --ms-green: #107C10;
+            --ms-red: #D13438;
+            --ms-purple: #8764B8;
+            --ms-teal: #00B294;
+            --ms-yellow: #FFB900;
+            
+            /* Gradient Backgrounds */
+            --ms-gradient-primary: linear-gradient(135deg, var(--ms-blue-600) 0%, var(--ms-blue-800) 100%);
+            --ms-gradient-secondary: linear-gradient(135deg, var(--ms-orange-500) 0%, var(--ms-orange-700) 100%);
+            --ms-gradient-hero: linear-gradient(135deg, var(--ms-blue-500) 0%, var(--ms-blue-700) 50%, var(--ms-orange-500) 100%);
+            --ms-gradient-card: linear-gradient(145deg, var(--ms-white) 0%, var(--ms-blue-50) 100%);
+            --ms-gradient-accent: linear-gradient(45deg, var(--ms-blue-400) 0%, var(--ms-orange-400) 100%);
+            --ms-gradient-dark: linear-gradient(135deg, var(--ms-blue-900) 0%, var(--ms-orange-900) 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--ms-gradient-hero);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: var(--ms-gradient-card);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 120, 212, 0.2);
+            border: 1px solid var(--ms-blue-200);
+            padding: 50px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .brand-subtitle {
+            color: #6b7280;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .form-subtitle {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #ffffff;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px;
+        }
+
+        .password-toggle-btn:hover {
+            color: #374151;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: #667eea;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            font-size: 14px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--ms-gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            background: var(--ms-gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 120, 212, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider-text {
+            padding: 0 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .captcha-section {
+            background: var(--ms-gradient-card);
+            border: 2px solid var(--ms-blue-200);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .captcha-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .captcha-box {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1f2937;
+            letter-spacing: 3px;
+            user-select: none;
+        }
+
+        .captcha-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .captcha-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .refresh-captcha {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 8px;
+            text-decoration: underline;
+        }
+
+        .refresh-captcha:hover {
+            color: #5a67d8;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #16a34a;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .demo-credentials {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .demo-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0369a1;
+            margin-bottom: 8px;
+        }
+
+        .demo-text {
+            font-size: 13px;
+            color: #0c4a6e;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 25px;
+                margin: 10px;
+            }
+            
+            .brand-name {
+                font-size: 24px;
+            }
+            
+            .form-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">
+                <img src="pic.jpg" alt="EcoNomix Logo">
+            </div>
+            <h1 class="brand-name">EcoNomix</h1>
+            <p class="brand-subtitle">Financial Planning Made Simple</p>
+        </div>
+
+        <div class="form-section">
+            <h2 class="form-title">Welcome back</h2>
+            <p class="form-subtitle">Sign in to your account to continue</p>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email address</label>
+                    <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle-btn" onclick="togglePassword()">👁️</button>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember" class="checkbox">
+                        <label for="remember" class="checkbox-label">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <div class="captcha-section">
+                    <div class="captcha-title">Security Verification</div>
+                    <div class="captcha-box" id="captchaBox">ABC123</div>
+                    <input type="text" id="captchaInput" class="captcha-input" placeholder="Enter the code above" required>
+                    <button type="button" class="refresh-captcha" onclick="generateCaptcha()">Refresh code</button>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    Sign in
+                </button>
+            </form>
+
+            <div class="divider">
+                <span class="divider-text">or</span>
+            </div>
+
+            <div class="demo-credentials">
+                <div class="demo-title">Demo Access</div>
+                <div class="demo-text">
+                    For demonstration purposes, you can use:<br>
+                    Email: demo@cfohelper.com<br>
+                    Password: demo123
+                </div>
+            </div>
+
+            <div class="signup-link">
+                Don't have an account? <a href="#" onclick="showSignup()">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCaptcha = '';
+
+        // Generate random CAPTCHA
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            currentCaptcha = '';
+            for (let i = 0; i < 6; i++) {
+                currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('captchaBox').textContent = currentCaptcha;
+        }
+
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.querySelector('.password-toggle-btn');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Hide messages
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Show signup
+        function showSignup() {
+            window.location.href = 'signup.html';
+        }
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const captcha = document.getElementById('captchaInput').value;
+            const loginBtn = document.getElementById('loginBtn');
+
+            // Hide previous messages
+            hideMessages();
+
+            // Validate CAPTCHA
+            if (captcha.toUpperCase() !== currentCaptcha) {
+                showError('Invalid security code. Please try again.');
+                generateCaptcha();
+                return;
+            }
+
+            // Disable button during processing
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing in...';
+
+            // Simulate authentication delay
+            setTimeout(() => {
+                // Check credentials (demo or any email/password for demo)
+                if ((email === 'demo@cfohelper.com' && password === 'demo123') || 
+                    (email && password)) {
+                    
+                    // Store authentication in sessionStorage
+                    sessionStorage.setItem('cfoHelperAuthenticated', 'true');
+                    sessionStorage.setItem('cfoHelperUser', email);
+                    sessionStorage.setItem('cfoHelperLoginTime', new Date().toISOString());
+                    
+                    showSuccess('Login successful! Redirecting...');
+                    
+                    // Redirect to main application
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    showError('Invalid email or password. Please try again.');
+                    generateCaptcha();
+                }
+                
+                // Re-enable button
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign in';
+            }, 2000);
+        });
+
+        // Initialize CAPTCHA on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCaptcha();
+            
+            // Check if already authenticated
+            if (sessionStorage.getItem('cfoHelperAuthenticated') === 'true') {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Auto-fill demo credentials on click
+        document.querySelector('.demo-credentials').addEventListener('click', function() {
+            document.getElementById('email').value = 'demo@cfohelper.com';
+            document.getElementById('password').value = 'demo123';
+        });
+    </script>
+</body>
+</html>

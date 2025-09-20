@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoNomix - Presentation Slides</title>
+    <style>
+        :root {
+            /* Microsoft Brand Colors */
+            --ms-blue: #0078D4;
+            --ms-blue-light: #106EBE;
+            --ms-blue-dark: #005A9E;
+            --ms-blue-50: #F0F8FF;
+            --ms-blue-100: #E6F3FF;
+            --ms-blue-200: #CCE7FF;
+            --ms-blue-300: #99CFFF;
+            --ms-blue-400: #66B7FF;
+            --ms-blue-500: #339FFF;
+            --ms-blue-600: #0078D4;
+            --ms-blue-700: #005A9E;
+            --ms-blue-800: #004578;
+            --ms-blue-900: #003052;
+            
+            --ms-orange: #FF8C00;
+            --ms-orange-light: #FFA500;
+            --ms-orange-dark: #FF7F00;
+            --ms-orange-50: #FFF8F0;
+            --ms-orange-100: #FFF1E6;
+            --ms-orange-200: #FFE3CC;
+            --ms-orange-300: #FFC799;
+            --ms-orange-400: #FFAB66;
+            --ms-orange-500: #FF8C00;
+            --ms-orange-600: #E67E00;
+            --ms-orange-700: #CC7000;
+            --ms-orange-800: #B36200;
+            --ms-orange-900: #995400;
+            
+            --ms-gray-50: #FAFAFA;
+            --ms-gray-100: #F5F5F5;
+            --ms-gray-200: #EEEEEE;
+            --ms-gray-300: #E1E1E1;
+            --ms-gray-400: #C7C7C7;
+            --ms-gray-500: #8A8886;
+            --ms-gray-600: #605E5C;
+            --ms-gray-700: #484644;
+            --ms-gray-800: #323130;
+            --ms-gray-900: #201F1E;
+            --ms-white: #FFFFFF;
+            --ms-black: #000000;
+            --ms-green: #107C10;
+            --ms-red: #D13438;
+            --ms-purple: #8764B8;
+            --ms-teal: #00B294;
+            --ms-yellow: #FFB900;
+            
+            /* Gradient Backgrounds */
+            --ms-gradient-primary: linear-gradient(135deg, var(--ms-blue-600) 0%, var(--ms-blue-800) 100%);
+            --ms-gradient-secondary: linear-gradient(135deg, var(--ms-orange-500) 0%, var(--ms-orange-700) 100%);
+            --ms-gradient-hero: linear-gradient(135deg, var(--ms-blue-500) 0%, var(--ms-blue-700) 50%, var(--ms-orange-500) 100%);
+            --ms-gradient-card: linear-gradient(145deg, var(--ms-white) 0%, var(--ms-blue-50) 100%);
+            --ms-gradient-accent: linear-gradient(45deg, var(--ms-blue-400) 0%, var(--ms-orange-400) 100%);
+            --ms-gradient-dark: linear-gradient(135deg, var(--ms-blue-900) 0%, var(--ms-orange-900) 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--ms-gradient-hero);
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+        }
+
+        .slide:nth-child(odd) {
+            background: var(--ms-gradient-primary);
+            color: white;
+        }
+
+        .slide:nth-child(even) {
+            background: var(--ms-gradient-card);
+            color: #333;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            opacity: 0.9;
+            margin-bottom: 50px;
+        }
+
+        .content {
+            font-size: 1.3em;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .content ul {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .content li {
+            margin: 15px 0;
+            font-size: 1.2em;
+        }
+
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+            
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            h2 {
+                font-size: 2em;
+            }
+            
+            h3 {
+                font-size: 1.5em;
+            }
+            
+            .content {
+                font-size: 1.1em;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <h1>💰 EcoNomix</h1>
+        <div class="subtitle">Interactive Budget & Runway Simulator</div>
+        <div class="content">
+            <div class="highlight">
+                Empowering Startups with Financial Intelligence
+            </div>
+            <p>Demo MVP for Hackathon/College Submission</p>
+        </div>
+        <div class="slide-number">1/12</div>
+    </div>
+
+    <!-- Slide 2: The Problem -->
+    <div class="slide">
+        <h2>The Startup Financial Planning Challenge</h2>
+        <div class="content">
+            <ul>
+                <li>90% of startups fail due to poor financial management</li>
+                <li>Founders struggle with runway calculations</li>
+                <li>Manual spreadsheet modeling is error-prone</li>
+                <li>Lack of real-time financial insights</li>
+                <li>Difficulty in scenario planning</li>
+            </ul>
+        </div>
+        <div class="slide-number">2/12</div>
+    </div>
+
+    <!-- Slide 3: Our Solution -->
+    <div class="slide">
+        <h2>EcoNomix - Your Financial Co-Pilot</h2>
+        <div class="content">
+            <ul>
+                <li>Interactive single-page web application</li>
+                <li>Real-time scenario modeling</li>
+                <li>Visual cash flow projections</li>
+                <li>Automated runway calculations</li>
+                <li>One-click report generation</li>
+                <li>Pathway API integration ready</li>
+            </ul>
+        </div>
+        <div class="slide-number">3/12</div>
+    </div>
+
+    <!-- Slide 4: Key Features -->
+    <div class="slide">
+        <h2>Powerful Features, Simple Interface</h2>
+        <div class="content">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">📊</div>
+                    <div class="stat-label">Input Parameters</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">🚀</div>
+                    <div class="stat-label">Scenario Simulation</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">📡</div>
+                    <div class="stat-label">Data Integration</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">📄</div>
+                    <div class="stat-label">Report Export</div>
+                </div>
+            </div>
+            <p>Flexprice billing: ₹10/scenario, ₹50/report</p>
+        </div>
+        <div class="slide-number">4/12</div>
+    </div>
+
+    <!-- Slide 5: Technology Stack -->
+    <div class="slide">
+        <h2>Built with Modern Web Technologies</h2>
+        <div class="content">
+            <ul>
+                <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
+                <li><strong>Charts:</strong> Chart.js for interactive visualizations</li>
+                <li><strong>PDF Generation:</strong> jsPDF for report exports</li>
+                <li><strong>Storage:</strong> localStorage for persistent data</li>
+                <li><strong>Design:</strong> Responsive CSS Grid and Flexbox</li>
+                <li><strong>Integration:</strong> RESTful API ready for Pathway</li>
+            </ul>
+        </div>
+        <div class="slide-number">5/12</div>
+    </div>
+
+    <!-- Slide 6: Live Demo -->
+    <div class="slide">
+        <h2>Let's See It In Action</h2>
+        <div class="content">
+            <div class="highlight">
+                <h3>Sample Scenario</h3>
+                <ul>
+                    <li>Starting Cash: ₹500,000</li>
+                    <li>Monthly Revenue: ₹200,000</li>
+                    <li>Monthly Expenses: ₹150,000</li>
+                    <li>3 Engineers @ ₹100,000 each</li>
+                    <li>25% Price Increase</li>
+                </ul>
+                <p><strong>Result:</strong> 18-month runway, positive cash flow</p>
+            </div>
+        </div>
+        <div class="slide-number">6/12</div>
+    </div>
+
+    <!-- Slide 7: Advanced Scenarios -->
+    <div class="slide">
+        <h2>Multiple Use Cases</h2>
+        <div class="content">
+            <ul>
+                <li><strong>Growth Mode:</strong> High hiring, price increases → Long runway</li>
+                <li><strong>Burn Warning:</strong> High expenses, low revenue → Short runway alerts</li>
+                <li><strong>Price Optimization:</strong> Strategic pricing → Improved cash flow</li>
+                <li><strong>Funding Planning:</strong> Model different funding scenarios</li>
+                <li><strong>Board Presentations:</strong> Professional reports for stakeholders</li>
+            </ul>
+        </div>
+        <div class="slide-number">7/12</div>
+    </div>
+
+    <!-- Slide 8: Pathway Integration -->
+    <div class="slide">
+        <h2>Real-World Data Integration</h2>
+        <div class="content">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">Current</div>
+                    <div class="stat-label">Mock data from JSON file</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Future</div>
+                    <div class="stat-label">Live Pathway API integration</div>
+                </div>
+            </div>
+            <ul>
+                <li>Real-time financial data</li>
+                <li>Automated updates</li>
+                <li>Reduced manual input</li>
+                <li>Enhanced accuracy</li>
+            </ul>
+        </div>
+        <div class="slide-number">8/12</div>
+    </div>
+
+    <!-- Slide 9: Business Model -->
+    <div class="slide">
+        <h2>Sustainable Revenue Model</h2>
+        <div class="content">
+            <ul>
+                <li><strong>Freemium:</strong> Basic features free</li>
+                <li><strong>Pay-per-use:</strong> ₹10 per scenario, ₹50 per report</li>
+                <li><strong>Enterprise:</strong> Custom pricing for teams</li>
+                <li><strong>API Access:</strong> Revenue sharing with Pathway</li>
+                <li><strong>Target Market:</strong> Startups, SMBs, investors, CFOs</li>
+            </ul>
+        </div>
+        <div class="slide-number">9/12</div>
+    </div>
+
+    <!-- Slide 10: Market Opportunity -->
+    <div class="slide">
+        <h2>Large Addressable Market</h2>
+        <div class="content">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">1.35M</div>
+                    <div class="stat-label">Startups Globally</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$12.2B</div>
+                    <div class="stat-label">Financial Software Market by 2025</div>
+                </div>
+            </div>
+            <ul>
+                <li>Early-stage startups (500K+ globally)</li>
+                <li>SMBs needing financial planning (50M+)</li>
+                <li>Investors and VCs (10K+ firms)</li>
+                <li>Financial consultants (100K+ professionals)</li>
+            </ul>
+        </div>
+        <div class="slide-number">10/12</div>
+    </div>
+
+    <!-- Slide 11: Competitive Advantage -->
+    <div class="slide">
+        <h2>Why EcoNomix Wins</h2>
+        <div class="content">
+            <ul>
+                <li><strong>Simplicity:</strong> No complex setup or training</li>
+                <li><strong>Interactivity:</strong> Real-time scenario modeling</li>
+                <li><strong>Visualization:</strong> Clear charts and projections</li>
+                <li><strong>Accessibility:</strong> Works on any device, any browser</li>
+                <li><strong>Integration Ready:</strong> Built for ecosystem connectivity</li>
+                <li><strong>Cost Effective:</strong> Pay-per-use model</li>
+            </ul>
+        </div>
+        <div class="slide-number">11/12</div>
+    </div>
+
+    <!-- Slide 12: Next Steps -->
+    <div class="slide">
+        <h2>Ready to Transform Financial Planning?</h2>
+        <div class="content">
+            <div class="highlight">
+                <h3>Next Steps</h3>
+                <ul>
+                    <li><strong>Immediate:</strong> Try the demo</li>
+                    <li><strong>Short-term:</strong> Pathway API integration</li>
+                    <li><strong>Medium-term:</strong> Advanced features and enterprise version</li>
+                    <li><strong>Long-term:</strong> Platform ecosystem and partnerships</li>
+                </ul>
+            </div>
+            <p>Thank you for your attention!</p>
+        </div>
+        <div class="slide-number">12/12</div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].style.display = 'none';
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].style.display = 'flex';
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Initialize
+        slides.forEach((slide, index) => {
+            slide.style.display = index === 0 ? 'flex' : 'none';
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+    </script>
+</body>
+</html>

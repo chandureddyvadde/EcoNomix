@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoNomix - Finance Helper Agent for Budget Scenarios | Microsoft Hackathon 2024</title>
+    <meta name="description" content="EcoNomix Finance Helper Agent helps anyone run 'what-if' budget scenarios and get clear, shareable outcomes. Whether for a startup founder, student fest organizer, or small business owner.">
+    <meta name="keywords" content="EcoNomix, budget scenarios, financial planning, startup, small business, what-if analysis, Microsoft, hackathon, Fluent Design">
+    <meta name="author" content="EcoNomix Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cfo-helper-demo.com">
+    <nav><a href="index.html">Home</a></nav>
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="EcoNomix - AI-Powered Financial Planning for Startups">
+    <meta property="og:description" content="Transform your startup's financial planning with AI-powered runway analysis and scenario modeling.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://economix-demo.com">
+    <meta property="og:image" content="https://economix-demo.com/images/og-image.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="EcoNomix - AI-Powered Financial Planning">
+    <meta name="twitter:description" content="Transform your startup's financial planning with AI-powered insights.">
+    <meta name="twitter:image" content="https://economix-demo.com/images/twitter-card.jpg">
+    
+    <!-- Microsoft Fluent Design System -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Critical CSS - Above the fold */
+        body { margin: 0; font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        .hero { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, #FAFAFA 0%, #FFFFFF 100%); }
+        .hero-content { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; color: #212121; }
+        .hero p { font-size: 1.25rem; color: #616161; margin-bottom: 2rem; }
+        .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+        .btn-primary { background: #0078D4; color: white; }
+        .btn-secondary { background: transparent; color: #0078D4; border: 2px solid #0078D4; }
+    </style>
+    
+    <style>
+        :root {
+            /* Microsoft Brand Colors */
+            --ms-blue: #0078D4;
+            --ms-blue-light: #106EBE;
+            --ms-blue-dark: #005A9E;
+            --ms-blue-50: #F0F8FF;
+            --ms-blue-100: #E6F3FF;
+            --ms-blue-200: #CCE7FF;
+            --ms-blue-300: #99CFFF;
+            --ms-blue-400: #66B7FF;
+            --ms-blue-500: #339FFF;
+            --ms-blue-600: #0078D4;
+            --ms-blue-700: #005A9E;
+            --ms-blue-800: #004578;
+            --ms-blue-900: #003052;
+            
+            --ms-orange: #FF8C00;
+            --ms-orange-light: #FFA500;
+            --ms-orange-dark: #FF7F00;
+            --ms-orange-50: #FFF8F0;
+            --ms-orange-100: #FFF1E6;
+            --ms-orange-200: #FFE3CC;
+            --ms-orange-300: #FFC799;
+            --ms-orange-400: #FFAB66;
+            --ms-orange-500: #FF8C00;
+            --ms-orange-600: #E67E00;
+            --ms-orange-700: #CC7000;
+            --ms-orange-800: #B36200;
+            --ms-orange-900: #995400;
+            
+            --ms-gray-50: #FAFAFA;
+            --ms-gray-100: #F5F5F5;
+            --ms-gray-200: #EEEEEE;
+            --ms-gray-300: #E1E1E1;
+            --ms-gray-400: #C7C7C7;
+            --ms-gray-500: #8A8886;
+            --ms-gray-600: #605E5C;
+            --ms-gray-700: #484644;
+            --ms-gray-800: #323130;
+            --ms-gray-900: #201F1E;
+            --ms-white: #FFFFFF;
+            --ms-black: #000000;
+            --ms-green: #107C10;
+            --ms-red: #D13438;
+            --ms-purple: #8764B8;
+            --ms-teal: #00B294;
+            --ms-yellow: #FFB900;
+            
+            /* Gradient Backgrounds */
+            --ms-gradient-primary: linear-gradient(135deg, var(--ms-blue-600) 0%, var(--ms-blue-800) 100%);
+            --ms-gradient-secondary: linear-gradient(135deg, var(--ms-orange-500) 0%, var(--ms-orange-700) 100%);
+            --ms-gradient-hero: linear-gradient(135deg, var(--ms-blue-500) 0%, var(--ms-blue-700) 50%, var(--ms-orange-500) 100%);
+            --ms-gradient-card: linear-gradient(145deg, var(--ms-white) 0%, var(--ms-blue-50) 100%);
+            --ms-gradient-accent: linear-gradient(45deg, var(--ms-blue-400) 0%, var(--ms-orange-400) 100%);
+            --ms-gradient-dark: linear-gradient(135deg, var(--ms-blue-900) 0%, var(--ms-orange-900) 100%);
+            
+            /* Legacy support */
+            --primary-blue: var(--ms-blue);
+            --secondary-blue: var(--ms-blue-light);
+            --light-bg: var(--ms-gray-50);
+            --dark-bg: #0B1220;
+            --positive-green: var(--ms-green);
+            --negative-red: var(--ms-red);
+            --ms-gray-50: #FAFAFA;
+            --ms-gray-100: #F5F5F5;
+            --ms-gray-200: #EEEEEE;
+            --ms-gray-300: #E0E0E0;
+            --ms-gray-400: #BDBDBD;
+            --ms-gray-500: #9E9E9E;
+            --ms-gray-600: #757575;
+            --ms-gray-700: #616161;
+            --ms-gray-800: #424242;
+            --ms-gray-900: #212121;
+            --ms-white: #FFFFFF;
+            --ms-black: #000000;
+            
+            /* Dark mode colors */
+            --ms-dark-bg: #1A1A1A;
+            --ms-dark-surface: #2D2D2D;
+            --ms-dark-text: #FFFFFF;
+            --ms-dark-text-secondary: #CCCCCC;
+            
+            /* Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+            --spacing-3xl: 64px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+            
+            /* Border radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease-out;
+            --transition-normal: 0.3s ease-out;
+            --transition-slow: 0.5s ease-out;
+            --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-spring: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
+            /* Fluent Design Elevation */
+            --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+            --elevation-2: 0 2px 4px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+            --elevation-4: 0 4px 8px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+            --elevation-8: 0 8px 16px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+            --elevation-16: 0 16px 32px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+            --elevation-64: 0 32px 64px rgba(0, 0, 0, 0.14), 0 0 2px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--ms-gray-900);
+            background: var(--ms-gradient-primary);
+            background-attachment: fixed;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body.dark-mode {
+            background: var(--ms-gradient-dark);
+            background-attachment: fixed;
+            color: var(--ms-dark-text);
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--ms-blue);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            z-index: 1000;
+            transition: top var(--transition-fast);
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--ms-gradient-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--ms-blue-200);
+            z-index: 100;
+            transition: all var(--transition-normal);
+            box-shadow: 0 8px 32px rgba(0, 120, 212, 0.15);
+        }
+
+        body.dark-mode .header {
+            background: var(--ms-gradient-dark);
+            border-bottom-color: var(--ms-blue-400);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ms-gray-900);
+        }
+
+        body.dark-mode .logo-text {
+            color: var(--ms-dark-text);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-lg);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--ms-gray-700);
+            font-weight: 500;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--ms-blue);
+        }
+
+        body.dark-mode .nav-link {
+            color: var(--ms-dark-text-secondary);
+        }
+
+        body.dark-mode .nav-link:hover {
+            color: var(--ms-blue-light);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--ms-gray-300);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-sm);
+            cursor: pointer;
+            color: var(--ms-gray-600);
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--ms-gray-100);
+            border-color: var(--ms-blue);
+            color: var(--ms-blue);
+        }
+
+        body.dark-mode .theme-toggle {
+            border-color: var(--ms-gray-600);
+            color: var(--ms-dark-text-secondary);
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: var(--ms-dark-surface);
+            border-color: var(--ms-blue-light);
+            color: var(--ms-blue-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--ms-gradient-hero);
+            position: relative;
+            overflow: hidden;
+            animation: heroFadeIn 1s ease-out;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(0, 120, 212, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(64, 224, 255, 0.1) 0%, transparent 50%);
+            animation: heroBackground 20s ease-in-out infinite;
+        }
+
+        @keyframes heroFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroBackground {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xl);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xxl);
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1s ease-out 0.3s both;
+        }
+
+        .hero-visual {
+            animation: slideInRight 1s ease-out 0.6s both;
+            position: relative;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-lg);
+            color: var(--ms-gray-900);
+            background: linear-gradient(135deg, var(--ms-gray-900) 0%, var(--ms-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--ms-gray-600);
+            margin-bottom: var(--spacing-xl);
+            line-height: 1.6;
+        }
+
+        .problem-questions {
+            background: rgba(0, 120, 212, 0.05);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .problem-text {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--ms-gray-800);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .example-questions {
+            list-style: none;
+            padding: 0;
+            margin: var(--spacing-md) 0;
+        }
+
+        .example-questions li {
+            background: var(--ms-white);
+            padding: var(--spacing-md);
+            margin: var(--spacing-sm) 0;
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--primary-blue);
+            font-style: italic;
+            color: var(--ms-gray-700);
+            box-shadow: var(--elevation-1);
+        }
+
+        .solution-text {
+            font-size: 1rem;
+            color: var(--ms-gray-600);
+            margin-top: var(--spacing-lg);
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+
+        .demo-visual {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--ms-blue) 0%, var(--ms-blue-light) 100%);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--elevation-16);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .demo-visual::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10px, 10px); }
+        }
+
+        .demo-chart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .demo-chart i {
+            font-size: 4rem;
+            color: white;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        body.dark-mode .hero {
+            background: var(--ms-gradient-dark);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23E0E0E0" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        body.dark-mode .hero::before {
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-3xl) var(--spacing-lg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            background: rgba(0, 120, 212, 0.1);
+            color: var(--ms-blue);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-xl);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid rgba(0, 120, 212, 0.2);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, var(--ms-gray-900) 0%, var(--ms-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark-mode .hero-title {
+            background: linear-gradient(135deg, var(--ms-dark-text) 0%, var(--ms-blue-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--ms-gray-600);
+            margin-bottom: var(--spacing-2xl);
+            line-height: 1.6;
+        }
+
+        body.dark-mode .hero-subtitle {
+            color: var(--ms-dark-text-secondary);
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--ms-gradient-primary);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 120, 212, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left var(--transition-normal);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--ms-gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 120, 212, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: var(--elevation-2);
+        }
+
+        .btn-secondary {
+            background: var(--ms-gradient-card);
+            color: var(--ms-blue);
+            border: 2px solid var(--ms-blue);
+            box-shadow: 0 4px 16px rgba(0, 120, 212, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ms-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            animation: slideInRight 1s ease-out;
+            position: relative;
+        }
+
+        .demo-card {
+            background: var(--ms-white);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--ms-gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .demo-card {
+            background: var(--ms-dark-surface);
+            border-color: var(--ms-gray-700);
+        }
+
+        .demo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ms-blue), var(--ms-blue-light));
+        }
+
+        .demo-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .demo-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--ms-blue);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .demo-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ms-gray-900);
+        }
+
+        body.dark-mode .demo-title {
+            color: var(--ms-dark-text);
+        }
+
+        .demo-chart {
+            height: 200px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .demo-chart {
+            background: linear-gradient(135deg, var(--ms-dark-bg) 0%, var(--ms-gray-800) 100%);
+        }
+
+        .chart-line {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--ms-blue), var(--ms-blue-light));
+            border-radius: 1px;
+            animation: chartGrow 2s ease-out;
+        }
+
+        .chart-line::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background: var(--ms-blue);
+            border-radius: 50%;
+            animation: chartDot 2s ease-out;
+        }
+
+        .demo-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--ms-gray-50);
+            border-radius: var(--radius-md);
+        }
+
+        body.dark-mode .stat-item {
+            background: var(--ms-gray-800);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--ms-blue);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--ms-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        body.dark-mode .stat-label {
+            color: var(--ms-dark-text-secondary);
+        }
+
+        /* Features Section */
+        .features {
+            padding: var(--spacing-3xl) var(--spacing-lg);
+            background: var(--ms-white);
+        }
+
+        body.dark-mode .features {
+            background: var(--ms-dark-bg);
+        }
+
+        .features-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(0, 120, 212, 0.1);
+            color: var(--ms-blue);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-xl);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            color: var(--ms-gray-900);
+        }
+
+        body.dark-mode .section-title {
+            color: var(--ms-dark-text);
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--ms-gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        body.dark-mode .section-subtitle {
+            color: var(--ms-dark-text-secondary);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .feature-card {
+            background: var(--ms-gradient-card);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            box-shadow: var(--elevation-2);
+            border: 1px solid var(--ms-gray-200);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ms-blue), var(--ms-blue-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-normal);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--elevation-8);
+            border-color: var(--ms-blue);
+        }
+
+        .feature-card:active {
+            transform: translateY(-4px);
+            box-shadow: var(--elevation-4);
+        }
+
+        body.dark-mode .feature-card {
+            background: var(--ms-dark-surface);
+            border-color: var(--ms-gray-700);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--ms-blue) 0%, var(--ms-blue-light) 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            color: var(--ms-gray-900);
+        }
+
+        body.dark-mode .feature-title {
+            color: var(--ms-dark-text);
+        }
+
+        .feature-description {
+            color: var(--ms-gray-600);
+            line-height: 1.6;
+        }
+
+        body.dark-mode .feature-description {
+            color: var(--ms-dark-text-secondary);
+        }
+
+        /* Animated Stats Section */
+        .stats-section {
+            background: var(--ms-white);
+            padding: var(--spacing-xxl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 120, 212, 0.05) 0%, rgba(64, 224, 255, 0.05) 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: var(--spacing-xl);
+            background: var(--ms-white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--elevation-2);
+            border: 1px solid var(--ms-gray-200);
+            transition: all var(--transition-normal);
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--elevation-8);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--ms-blue);
+            margin-bottom: var(--spacing-sm);
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            color: var(--ms-gray-600);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+        }
+
+        .stat-description {
+            font-size: 0.875rem;
+            color: var(--ms-gray-500);
+            line-height: 1.5;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: var(--ms-gray-50);
+            padding: var(--spacing-xxl) 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .testimonial-card {
+            background: var(--ms-white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--elevation-2);
+            border: 1px solid var(--ms-gray-200);
+            position: relative;
+            transition: all var(--transition-normal);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: var(--spacing-lg);
+            font-size: 4rem;
+            color: var(--ms-blue);
+            font-family: 'Poppins', serif;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--elevation-8);
+        }
+
+        .testimonial-text {
+            font-size: 1.125rem;
+            color: var(--ms-gray-700);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ms-blue) 0%, var(--ms-blue-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .testimonial-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ms-gray-900);
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            font-size: 0.875rem;
+            color: var(--ms-gray-600);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            background: var(--ms-white);
+            padding: var(--spacing-xxl) 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+
+        .step-card {
+            text-align: center;
+            padding: var(--spacing-xl);
+            position: relative;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .step-card:nth-child(1) { animation-delay: 0.1s; }
+        .step-card:nth-child(2) { animation-delay: 0.2s; }
+        .step-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .step-number {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--ms-blue) 0%, var(--ms-blue-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto var(--spacing-lg);
+            position: relative;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--ms-blue) 0%, transparent 100%);
+            transform: translateY(-50%);
+        }
+
+        .step-card:last-child .step-number::after {
+            display: none;
+        }
+
+        .step-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 120, 212, 0.1);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ms-blue);
+            font-size: 1.5rem;
+            margin: 0 auto var(--spacing-lg);
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ms-gray-900);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .step-description {
+            color: var(--ms-gray-600);
+            line-height: 1.6;
+        }
+
+        /* Why This Matters Section */
+        .why-matters {
+            padding: var(--spacing-3xl) var(--spacing-lg);
+            background: linear-gradient(135deg, var(--ms-gray-50) 0%, var(--ms-white) 100%);
+        }
+
+        body.dark-mode .why-matters {
+            background: linear-gradient(135deg, var(--ms-dark-bg) 0%, var(--ms-dark-surface) 100%);
+        }
+
+        .why-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-3xl);
+            align-items: center;
+        }
+
+        .why-text {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .why-visual {
+            animation: slideInRight 1s ease-out;
+            position: relative;
+        }
+
+        .problem-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .problem-stat {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: rgba(220, 53, 69, 0.1);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .problem-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #dc3545;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .problem-stat-label {
+            font-size: 14px;
+            color: var(--ms-gray-600);
+            font-weight: 500;
+        }
+
+        body.dark-mode .problem-stat-label {
+            color: var(--ms-dark-text-secondary);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--ms-gray-900);
+            color: var(--ms-white);
+            padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-xl);
+        }
+
+        body.dark-mode .footer {
+            background: var(--ms-black);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--spacing-2xl);
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            color: var(--ms-gray-400);
+            text-decoration: none;
+            margin-bottom: var(--spacing-sm);
+            display: block;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--ms-blue-light);
+        }
+
+        .local-instructions {
+            margin-top: var(--spacing-md);
+        }
+
+        .footer-text {
+            color: var(--ms-gray-600);
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.875rem;
+        }
+
+        .footer-list {
+            color: var(--ms-gray-600);
+            margin: var(--spacing-sm) 0;
+            padding-left: var(--spacing-lg);
+        }
+
+        .footer-list li {
+            margin-bottom: var(--spacing-xs);
+            font-size: 0.875rem;
+        }
+
+        .footer-list code {
+            background: var(--ms-gray-100);
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--ms-blue);
+        }
+
+        body.dark-mode .footer-list code {
+            background: var(--ms-gray-700);
+            color: var(--ms-blue-light);
+        }
+
+        .footer-bottom {
+            margin-top: var(--spacing-2xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid var(--ms-gray-700);
+            text-align: center;
+            color: var(--ms-gray-400);
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes chartGrow {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes chartDot {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: var(--spacing-md);
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-2xl);
+                padding: var(--spacing-2xl) var(--spacing-md);
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+
+            .why-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-2xl);
+            }
+
+            .problem-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .demo-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles */
+        .btn:focus,
+        .theme-toggle:focus,
+        .nav-link:focus {
+            outline: 2px solid var(--ms-blue);
+            outline-offset: 2px;
+        }
+
+        /* High contrast mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --ms-gray-200: #000000;
+                --ms-gray-600: #000000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="header-content">
+            <a href="#" class="logo" aria-label="EcoNomix Home">
+                <div class="logo-icon" aria-hidden="true">
+                    <img src="pic.jpg" alt="EcoNomix Logo">
+                </div>
+                <span class="logo-text">EcoNomix</span>
+            </a>
+            
+            <nav class="nav" role="navigation" aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#stats-title" class="nav-link">Results</a></li>
+                    <li><a href="#testimonials-title" class="nav-link">Testimonials</a></li>
+                    <li><a href="#how-title" class="nav-link">How It Works</a></li>
+                    <li><a href="#why-matters" class="nav-link">Why This Matters</a></li>
+                </ul>
+                
+                <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero" role="banner">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <i class="fas fa-trophy" aria-hidden="true"></i>
+                        Microsoft Hackathon 2024
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        EcoNomix — Finance Helper Agent
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        Whether for a startup founder, a student fest organizer, or a small business owner.
+                    </p>
+                    
+            <div class="problem-questions">
+                <p class="problem-text">Managing money is tough — whether for a startup founder, a student fest organizer, or a small business owner. People ask:</p>
+                <ul class="example-questions">
+                    <li><strong>Startup:</strong> "If I hire 2 more engineers, can I survive 6 months?"</li>
+                    <li><strong>Student Fest:</strong> "If we spend ₹10,000 extra on marketing, what's left for prizes?"</li>
+                    <li><strong>Small Business:</strong> "If I increase product price by 10%, what happens to profit?"</li>
+                </ul>
+                <p class="solution-text">Most use Excel, but those don't show clear 'what-if' outcomes. EcoNomix lets you adjust inputs, see effects on budget/runway with charts, and generate shareable reports for any financial scenario.</p>
+            </div>
+                    
+                    <div class="hero-ctas">
+                        <a href="login.html" class="btn btn-primary" aria-label="Try the demo">
+                            <i class="fas fa-rocket" aria-hidden="true"></i>
+                            Try Demo
+                        </a>
+                        <a href="https://github.com/economix/hackathon" class="btn btn-secondary" aria-label="View source code on GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            View Source
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="demo-visual" role="img" aria-label="EcoNomix dashboard preview">
+                        <div class="demo-chart" aria-hidden="true">
+                            <div class="chart-line"></div>
+                        </div>
+                        
+                        <div class="demo-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Months Runway</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">₹2.1M</div>
+                                <div class="stat-label">Cash Flow</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features" role="region" aria-labelledby="features-title">
+            <div class="features-content">
+                <div class="section-header">
+                    <div class="section-badge">Core Features</div>
+                    <h2 id="features-title" class="section-title">Everything You Need for Budget Scenarios</h2>
+                    <p class="section-subtitle">
+                        Interactive tools designed for clear 'what-if' financial analysis
+                    </p>
+                </div>
+                
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <h3 class="feature-title">Multi-Domain Scenario Builder</h3>
+                        <p class="feature-description">
+                            Flexible inputs for any domain: hiring costs, marketing spend, price changes, event expenses, or operational costs. Perfect for startups, events, and businesses.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Smart Financial Forecasting</h3>
+                        <p class="feature-description">
+                            Get instant insights: runway calculations for startups, budget allocation for events, profit projections for businesses. All with interactive charts and clear summaries.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h3 class="feature-title">Professional Reports & Sharing</h3>
+                        <p class="feature-description">
+                            Generate investor-ready reports for startups, event budget summaries for organizers, or business financial plans. Share via PDF, JSON, or secure links.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h3 class="feature-title">Flexible Pricing Model</h3>
+                        <p class="feature-description">
+                            Pay only for what you use: ₹10 per scenario, ₹50 per report. Perfect for budget-conscious startups, student organizations, and small businesses.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <h3 class="feature-title">Live Data Integration</h3>
+                        <p class="feature-description">
+                            Connect to real financial data sources. Whether it's bank accounts, accounting software, or event management tools - get fresh data for accurate projections.
+                        </p>
+                    </article>
+                    
+                    <article class="feature-card">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3 class="feature-title">Usage Tracking & Insights</h3>
+                        <p class="feature-description">
+                            Track your financial planning activity: scenarios tested, reports generated, and costs. Get insights to optimize your budgeting workflow across all domains.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animated Stats Section -->
+        <section class="stats-section" role="region" aria-labelledby="stats-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">Impact Metrics</div>
+                    <h2 id="stats-title" class="section-title">Proven Results</h2>
+                    <p class="section-subtitle">See how EcoNomix transforms budget scenario planning</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="90">0</div>
+                        <div class="stat-label">% of Startups Fail</div>
+                        <div class="stat-description">Due to poor financial management - EcoNomix changes that</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="75">0</div>
+                        <div class="stat-label">% Time Saved</div>
+                        <div class="stat-description">On budget scenario planning vs. Excel spreadsheets</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="1000">0</div>
+                        <div class="stat-label">+ Scenarios Tested</div>
+                        <div class="stat-description">By users making critical financial decisions</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section" role="region" aria-labelledby="testimonials-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">Social Proof</div>
+                    <h2 id="testimonials-title" class="section-title">What Founders Say</h2>
+                    <p class="section-subtitle">Real feedback from users across different industries</p>
+                </div>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            EcoNomix saved us from a major cash flow crisis. We tested hiring 3 engineers and realized we'd run out of money in 4 months. The 'what-if' scenarios are game-changing.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">SJ</div>
+                            <div class="testimonial-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Startup Founder, TechStart Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            As a student fest organizer, EcoNomix helped me allocate our ₹50,000 budget perfectly. We could see exactly how spending on marketing affected our prize pool.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">MR</div>
+                            <div class="testimonial-info">
+                                <h4>Michael Rodriguez</h4>
+                                <p>Student Fest Organizer, University</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-text">
+                            The pricing scenario tool is brilliant. I tested a 10% price increase and saw it would boost our profit by 40%. Finally, clear financial planning without Excel headaches.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">AL</div>
+                            <div class="testimonial-info">
+                                <h4>Alex Liu</h4>
+                                <p>Small Business Owner, DataFlow</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works" role="region" aria-labelledby="how-title">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-badge">Simple Process</div>
+                    <h2 id="how-title" class="section-title">How It Works</h2>
+                    <p class="section-subtitle">Get started in 60 seconds with our streamlined process</p>
+                </div>
+                
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-icon">
+                            <i class="fas fa-sliders-h" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="step-title">Adjust Sliders</h3>
+                        <p class="step-description">Use intuitive sliders to adjust spending, pricing, hiring, and other financial inputs. See changes in real-time as you move the controls.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-icon">
+                            <i class="fas fa-play" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="step-title">Run Scenario</h3>
+                        <p class="step-description">Click "Run Scenario" to see immediate forecasts with textual summaries and interactive charts showing runway, burn, and profit changes.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-icon">
+                            <i class="fas fa-share-alt" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="step-title">Export & Share</h3>
+                        <p class="step-description">Generate PDF reports or JSON files, share via secure links, and track your usage with transparent Flexprice billing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why This Matters Section -->
+        <section id="why-matters" class="why-matters" role="region" aria-labelledby="why-title">
+            <div class="why-content">
+                <div class="why-text">
+                    <div class="section-badge">The Problem</div>
+                    <h2 id="why-title" class="section-title">Why This Matters</h2>
+                    <p class="section-subtitle">
+                        Financial planning is broken for everyone - not just startups. Whether you're a startup founder, student fest organizer, or small business owner, managing money is tough and Excel doesn't help.
+                    </p>
+                    
+                    <div class="problem-stats">
+                        <div class="problem-stat">
+                            <div class="problem-stat-value">90%</div>
+                            <div class="problem-stat-label">of startups fail due to poor financial management</div>
+                        </div>
+                        <div class="problem-stat">
+                            <div class="problem-stat-value">75%</div>
+                            <div class="problem-stat-label">time wasted on Excel budget scenarios</div>
+                        </div>
+                        <div class="problem-stat">
+                            <div class="problem-stat-value">60%</div>
+                            <div class="problem-stat-label">of small businesses overspend on marketing</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="why-visual">
+                    <div class="demo-card" role="img" aria-label="Problem visualization">
+                        <div class="demo-header">
+                            <div class="demo-icon" aria-hidden="true">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <h3 class="demo-title">The Challenge</h3>
+                        </div>
+                        
+                        <div class="demo-chart" aria-hidden="true">
+                            <div class="chart-line" style="background: linear-gradient(90deg, #dc3545, #ff6b6b);"></div>
+                        </div>
+                        
+                        <div class="demo-stats">
+                            <div class="stat-item">
+                                <div class="stat-value" style="color: #dc3545;">3</div>
+                                <div class="stat-label">Months Left</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" style="color: #dc3545;">-₹500K</div>
+                                <div class="stat-label">Monthly Burn</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>EcoNomix</h3>
+                <p>Finance Helper Agent for budget scenarios. Whether for a startup founder, student fest organizer, or small business owner.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="login.html" class="footer-link">Try Demo</a></li>
+                    <li><a href="#features" class="footer-link">Features</a></li>
+                    <li><a href="#stats-title" class="footer-link">Results</a></li>
+                    <li><a href="#testimonials-title" class="footer-link">Testimonials</a></li>
+                    <li><a href="#how-title" class="footer-link">How It Works</a></li>
+                    <li><a href="https://github.com/economix/hackathon" class="footer-link">Source Code</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Run Locally</h3>
+                <div class="local-instructions">
+                    <p class="footer-text">Get started in 3 steps:</p>
+                    <ol class="footer-list">
+                        <li>Download the project files</li>
+                        <li>Open terminal in project folder</li>
+                        <li>Run: <code>python -m http.server 8000</code></li>
+                    </ol>
+                    <p class="footer-text">Visit <code>localhost:8000/landing.html</code></p>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Microsoft Hackathon</h3>
+                <ul class="footer-links">
+                    <li><a href="https://hackathon.microsoft.com" class="footer-link">Official Site</a></li>
+                    <li><a href="https://docs.microsoft.com" class="footer-link">Documentation</a></li>
+                    <li><a href="https://azure.microsoft.com" class="footer-link">Azure Services</a></li>
+                    <li><a href="https://powerplatform.microsoft.com" class="footer-link">Power Platform</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 EcoNomix. Built for Microsoft Hackathon 2024. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Performance optimization: Preload critical resources
+        function preloadCriticalResources() {
+            const criticalResources = [
+                'login.html',
+                'index.html'
+            ];
+            
+            criticalResources.forEach(resource => {
+                const link = document.createElement('link');
+                link.rel = 'prefetch';
+                link.href = resource;
+                document.head.appendChild(link);
+            });
+        }
+
+        // Lazy loading for images
+        function setupLazyLoading() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // Performance monitoring
+        function trackPerformance() {
+            if ('performance' in window) {
+                window.addEventListener('load', () => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    const loadTime = perfData.loadEventEnd - perfData.loadEventStart;
+                    console.log(`Page load time: ${loadTime}ms`);
+                });
+            }
+        }
+
+        // Animated counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.dataset.target);
+                        const duration = 2000; // 2 seconds
+                        const increment = target / (duration / 16); // 60fps
+                        let current = 0;
+                        
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = target + (target >= 100 ? '+' : '');
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = Math.floor(current) + (target >= 100 ? '+' : '');
+                            }
+                        }, 16);
+                        
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Smooth scrolling for navigation links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Enhanced button interactions
+        function setupButtonInteractions() {
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+                
+                button.addEventListener('mousedown', function() {
+                    this.style.transform = 'translateY(0) scale(0.98)';
+                });
+                
+                button.addEventListener('mouseup', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
+                });
+            });
+        }
+
+        // Parallax effect for hero section
+        function setupParallax() {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.pageYOffset;
+                    const rate = scrolled * -0.5;
+                    hero.style.transform = `translateY(${rate}px)`;
+                });
+            }
+        }
+
+        // Progressive enhancement for animations
+        function setupProgressiveEnhancement() {
+            // Check if user prefers reduced motion
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (prefersReducedMotion) {
+                // Disable animations for users who prefer reduced motion
+                document.documentElement.style.setProperty('--transition-fast', '0s');
+                document.documentElement.style.setProperty('--transition-normal', '0s');
+                document.documentElement.style.setProperty('--transition-slow', '0s');
+            }
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            // Preload critical resources
+            preloadCriticalResources();
+            
+            // Setup lazy loading
+            setupLazyLoading();
+            
+            // Track performance
+            trackPerformance();
+            
+            // Setup enhanced interactions
+            animateCounters();
+            setupSmoothScrolling();
+            setupButtonInteractions();
+            setupParallax();
+            setupProgressiveEnhancement();
+            
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.className = 'fas fa-sun';
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe feature cards
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
+        });
+
+        document.addEventListener('mousedown', function() {
+            document.body.classList.remove('keyboard-navigation');
+        });
+    </script>
+</body>
+</html>

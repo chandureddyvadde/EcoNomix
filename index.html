@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoNomix - Finance Helper Agent | Microsoft Hackathon</title>
+    <meta name="description" content="EcoNomix Finance Helper Agent for budget scenarios. Whether for a startup founder, student fest organizer, or small business owner.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <a href="landing.html"><button style="background-color: blue;">description</button></a>
+    <a href="slides.html"><button style="background-color: blue;">slides</button></a>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Microsoft Brand Colors */
+            --ms-blue: #0078D4;
+            --ms-blue-light: #106EBE;
+            --ms-blue-dark: #005A9E;
+            --ms-blue-50: #F0F8FF;
+            --ms-blue-100: #E6F3FF;
+            --ms-blue-200: #CCE7FF;
+            --ms-blue-300: #99CFFF;
+            --ms-blue-400: #66B7FF;
+            --ms-blue-500: #339FFF;
+            --ms-blue-600: #0078D4;
+            --ms-blue-700: #005A9E;
+            --ms-blue-800: #004578;
+            --ms-blue-900: #003052;
+            
+            --ms-orange: #FF8C00;
+            --ms-orange-light: #FFA500;
+            --ms-orange-dark: #FF7F00;
+            --ms-orange-50: #FFF8F0;
+            --ms-orange-100: #FFF1E6;
+            --ms-orange-200: #FFE3CC;
+            --ms-orange-300: #FFC799;
+            --ms-orange-400: #FFAB66;
+            --ms-orange-500: #FF8C00;
+            --ms-orange-600: #E67E00;
+            --ms-orange-700: #CC7000;
+            --ms-orange-800: #B36200;
+            --ms-orange-900: #995400;
+            
+            --ms-gray-50: #FAFAFA;
+            --ms-gray-100: #F5F5F5;
+            --ms-gray-200: #EEEEEE;
+            --ms-gray-300: #E1E1E1;
+            --ms-gray-400: #C7C7C7;
+            --ms-gray-500: #8A8886;
+            --ms-gray-600: #605E5C;
+            --ms-gray-700: #484644;
+            --ms-gray-800: #323130;
+            --ms-gray-900: #201F1E;
+            --ms-white: #FFFFFF;
+            --ms-black: #000000;
+            --ms-green: #107C10;
+            --ms-red: #D13438;
+            --ms-purple: #8764B8;
+            --ms-teal: #00B294;
+            --ms-yellow: #FFB900;
+            
+            /* Gradient Backgrounds */
+            --ms-gradient-primary: linear-gradient(135deg, var(--ms-blue-600) 0%, var(--ms-blue-800) 100%);
+            --ms-gradient-secondary: linear-gradient(135deg, var(--ms-orange-500) 0%, var(--ms-orange-700) 100%);
+            --ms-gradient-hero: linear-gradient(135deg, var(--ms-blue-500) 0%, var(--ms-blue-700) 50%, var(--ms-orange-500) 100%);
+            --ms-gradient-card: linear-gradient(145deg, var(--ms-white) 0%, var(--ms-blue-50) 100%);
+            --ms-gradient-accent: linear-gradient(45deg, var(--ms-blue-400) 0%, var(--ms-orange-400) 100%);
+            --ms-gradient-dark: linear-gradient(135deg, var(--ms-blue-900) 0%, var(--ms-orange-900) 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--ms-gradient-primary);
+            background-attachment: fixed;
+            color: #1e293b;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Authentication Check */
+        .auth-check {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #f8fafc;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .auth-check.show {
+            display: flex;
+        }
+
+        .auth-message {
+            background: var(--ms-gradient-card);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 120, 212, 0.2);
+            border: 1px solid var(--ms-blue-200);
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .auth-message h2 {
+            color: #1e293b;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .auth-message p {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .auth-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .auth-btn:hover {
+            background: #2563eb;
+        }
+
+        /* Main Layout */
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid #e2e8f0;
+            color: #64748b;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .section {
+            background: var(--ms-gradient-card);
+            border-radius: 16px;
+            border: 1px solid var(--ms-blue-200);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 120, 212, 0.1);
+        }
+
+        .section-header {
+            padding: 24px 24px 0;
+            border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .section-content {
+            padding: 0 24px 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-help {
+            font-size: 0.75rem;
+            color: var(--ms-gray-600);
+            margin-top: 0.25rem;
+            display: block;
+            font-style: italic;
+        }
+        
+        body.dark-mode .form-help {
+            color: var(--ms-gray-400);
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .slider-group {
+            margin-bottom: 24px;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: #e5e7eb;
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .slider-value {
+            min-width: 60px;
+            text-align: center;
+            font-weight: 600;
+            color: #3b82f6;
+            font-size: 14px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--ms-gradient-primary);
+            color: white;
+            box-shadow: 0 4px 16px rgba(0, 120, 212, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--ms-gradient-secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 120, 212, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--ms-gradient-accent);
+            color: white;
+            box-shadow: 0 4px 16px rgba(255, 140, 0, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ms-gradient-primary);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 120, 212, 0.4);
+        }
+
+        .btn-warning {
+            background: var(--ms-gradient-secondary);
+            color: white;
+            box-shadow: 0 4px 16px rgba(255, 140, 0, 0.3);
+        }
+
+        .btn-warning:hover {
+            background: var(--ms-gradient-accent);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #D13438 0%, #B71C1C 100%);
+            color: white;
+            box-shadow: 0 4px 16px rgba(209, 52, 56, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #B71C1C 0%, #D32F2F 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(209, 52, 56, 0.4);
+        }
+
+        .chart-container {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-card h4 {
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .runway-warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .runway-danger {
+            background: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #991b1b;
+        }
+
+        .usage-counters {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .usage-counters h4 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            text-align: center;
+        }
+
+        .counter-item {
+            padding: 16px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .counter-item .label {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .counter-item .value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .billing-total {
+            margin-top: 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding: 24px 16px;
+            }
+
+            .button-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .counter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                padding: 0 16px;
+            }
+
+            .brand-name {
+                font-size: 18px;
+            }
+
+            .section-content {
+                padding: 0 16px 16px;
+            }
+
+            .section-header {
+                padding: 16px 16px 0;
+            }
+        }
+
+        /* Flexprice Billing Section */
+        .billing-section {
+            margin-top: 24px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .billing-section h3 {
+            margin: 0 0 16px 0;
+            color: #495057;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .billing-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .billing-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .billing-item:last-child {
+            border-bottom: none;
+        }
+
+        .billing-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .billing-value {
+            font-weight: 600;
+            color: #0078D4;
+        }
+
+        .billing-rate {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .billing-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-top: 8px;
+            border-top: 2px solid #0078D4;
+            font-weight: 600;
+        }
+
+        .billing-total .billing-value {
+            font-size: 18px;
+            color: #0078D4;
+        }
+
+        /* Pathway Integration Section */
+        .pathway-section {
+            margin-top: 24px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .pathway-section h3 {
+            margin: 0 0 16px 0;
+            color: #495057;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .pathway-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pathway-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-indicator {
+            font-size: 12px;
+            color: #28a745;
+        }
+
+        .status-indicator.fresh {
+            color: #28a745;
+        }
+
+        .status-indicator.baseline {
+            color: #6c757d;
+        }
+
+        .status-text {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .pathway-btn {
+            background: #0078D4;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .pathway-btn:hover {
+            background: #106EBE;
+        }
+
+        .pathway-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .pathway-info {
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .billing-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .billing-total {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Authentication Check -->
+    <div class="auth-check" id="authCheck">
+        <div class="auth-message">
+            <h2>Authentication Required</h2>
+            <p>Please sign in to access EcoNomix</p>
+            <a href="login.html" class="auth-btn">Sign In</a>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="pic.jpg" alt="EcoNomix Logo">
+                    </div>
+                    <div class="brand-name">EcoNomix</div>
+                </div>
+                <div class="user-section">
+                    <div class="user-info">
+                        <div class="user-avatar" id="userAvatar">U</div>
+                        <span id="userEmail">user@example.com</span>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Financial Parameters</h2>
+                    <p class="section-subtitle">Configure your business model and assumptions</p>
+                </div>
+                <div class="section-content">
+                    <div class="form-group">
+                        <label class="form-label" for="domainType">Select Your Domain</label>
+                        <select id="domainType" class="form-input">
+                            <option value="startup">Startup/Company</option>
+                            <option value="event">Student Fest/Event</option>
+                            <option value="business">Small Business</option>
+                        </select>
+                        <small class="form-help">Choose your domain to get relevant examples and terminology</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="startingCash">Starting Cash (₹)</label>
+                        <input type="number" id="startingCash" class="form-input" value="250000" min="0" step="1000" placeholder="Enter starting cash amount">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="baseRevenue">Base Monthly Revenue (₹)</label>
+                        <input type="number" id="baseRevenue" class="form-input" value="150000" min="0" step="1000" placeholder="Enter monthly revenue">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="baseExpenses">Base Monthly Expenses (₹)</label>
+                        <input type="number" id="baseExpenses" class="form-input" value="110000" min="0" step="1000" placeholder="Enter monthly expenses">
+                    </div>
+
+                    <div class="slider-group">
+                        <label class="form-label" for="hires">Additional Staff/Resources (0-10)</label>
+                        <div class="slider-container">
+                            <input type="range" id="hires" class="slider" min="0" max="10" value="2">
+                            <span class="slider-value" id="hiresValue">2</span>
+                        </div>
+                        <small class="form-help">Engineers for startups, volunteers for events, staff for businesses</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="engineerCost">Cost per Additional Resource (₹)</label>
+                        <input type="number" id="engineerCost" class="form-input" value="80000" min="0" step="1000" placeholder="Enter cost per resource">
+                        <small class="form-help">Engineer salary, volunteer stipend, or staff cost</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="marketingExtra">Additional Spending (₹)</label>
+                        <input type="number" id="marketingExtra" class="form-input" value="20000" min="0" step="1000" placeholder="Enter additional budget">
+                        <small class="form-help">Marketing, event expenses, equipment, or operational costs</small>
+                    </div>
+
+                    <div class="slider-group">
+                        <label class="form-label" for="priceIncrease">Revenue Change (-50% to +200%)</label>
+                        <div class="slider-container">
+                            <input type="range" id="priceIncrease" class="slider" min="-50" max="200" value="0">
+                            <span class="slider-value" id="priceIncreaseValue">0%</span>
+                        </div>
+                        <small class="form-help">Price changes, ticket sales, or revenue adjustments</small>
+                    </div>
+
+                    <div class="button-grid">
+                        <button class="btn btn-primary" onclick="simulateScenario()">
+                            <span>🚀</span> Simulate Scenario
+                        </button>
+                        <button class="btn btn-secondary" onclick="fetchLatestData()">
+                            <span>📡</span> Fetch Latest Data
+                        </button>
+                        <button class="btn btn-warning" onclick="exportReport()">
+                            <span>📄</span> Export Report
+                        </button>
+                        <button class="btn btn-danger" onclick="resetCounters()">
+                            <span>🔄</span> Reset Counters
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Projection Results</h2>
+                    <p class="section-subtitle">Analyze your financial projections and runway</p>
+                </div>
+                <div class="section-content">
+                    <div class="chart-container">
+                        <canvas id="cashFlowChart" width="400" height="200"></canvas>
+                    </div>
+
+                    <div class="summary-stats">
+                        <div class="stat-card">
+                            <h4>Runway</h4>
+                            <div class="value" id="runway">-- months</div>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Cash After 6 Months</h4>
+                            <div class="value" id="cashAfter6Months">₹--</div>
+                        </div>
+                    </div>
+
+                    <div id="runwayWarning" class="runway-warning" style="display: none;">
+                        ⚠️ Warning: Low runway detected!
+                    </div>
+
+                    <div class="usage-counters">
+                        <h4>Usage Statistics</h4>
+                        <div class="counter-grid">
+                            <div class="counter-item">
+                                <div class="label">Scenarios Run</div>
+                                <div class="value" id="scenariosRun">0</div>
+                            </div>
+                            <div class="counter-item">
+                                <div class="label">Reports Exported</div>
+                                <div class="value" id="reportsExported">0</div>
+                            </div>
+                            <div class="counter-item">
+                                <div class="label">Total Billed</div>
+                                <div class="value" id="totalBilled">₹0</div>
+                            </div>
+                        </div>
+                        <div class="billing-total">
+                            💳 Flexprice Billing: ₹10/scenario, ₹50/report
+                        </div>
+                    </div>
+
+                    <!-- Flexprice Billing Details -->
+                    <div class="billing-section">
+                        <h3>Flexprice Billing Details</h3>
+                        <div class="billing-card">
+                            <div class="billing-item">
+                                <span class="billing-label">Scenarios Tested:</span>
+                                <span class="billing-value" id="scenariosBilled">0</span>
+                                <span class="billing-rate">@ ₹10 each</span>
+                            </div>
+                            <div class="billing-item">
+                                <span class="billing-label">Reports Exported:</span>
+                                <span class="billing-value" id="reportsBilled">0</span>
+                                <span class="billing-rate">@ ₹50 each</span>
+                            </div>
+                            <div class="billing-total">
+                                <span class="billing-label">Estimated Monthly Bill:</span>
+                                <span class="billing-value" id="monthlyBill">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pathway Integration -->
+                    <div class="pathway-section">
+                        <h3>Pathway Integration</h3>
+                        <div class="pathway-card">
+                            <div class="pathway-status">
+                                <span class="status-indicator" id="pathwayStatus">●</span>
+                                <span class="status-text" id="pathwayStatusText">Baseline Data</span>
+                            </div>
+                            <button class="pathway-btn" id="refreshPathway">Refresh from Pathway</button>
+                            <div class="pathway-info">
+                                <small>Last updated: <span id="lastUpdated">Never</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let cashFlowChart = null;
+        let currentProjection = null;
+
+        // Authentication functions
+        function checkAuthentication() {
+            const isAuthenticated = sessionStorage.getItem('cfoHelperAuthenticated') === 'true';
+            const authCheck = document.getElementById('authCheck');
+            
+            if (!isAuthenticated) {
+                authCheck.classList.add('show');
+                return false;
+            } else {
+                authCheck.classList.remove('show');
+                updateUserInfo();
+                return true;
+            }
+        }
+
+        function updateUserInfo() {
+            const userEmail = sessionStorage.getItem('cfoHelperUser') || 'user@example.com';
+            const userAvatar = document.getElementById('userAvatar');
+            const userEmailSpan = document.getElementById('userEmail');
+            
+            // Try to get user data from localStorage (from signup)
+            const userData = JSON.parse(localStorage.getItem('ecoNomixUserData') || '{}');
+            
+            if (userData.firstName && userData.lastName) {
+                userEmailSpan.textContent = `${userData.firstName} ${userData.lastName}`;
+                userAvatar.textContent = userData.firstName.charAt(0).toUpperCase();
+            } else {
+                userEmailSpan.textContent = userEmail;
+                userAvatar.textContent = userEmail.charAt(0).toUpperCase();
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('cfoHelperAuthenticated');
+            sessionStorage.removeItem('cfoHelperUser');
+            sessionStorage.removeItem('cfoHelperLoginTime');
+            localStorage.removeItem('ecoNomixUserData');
+            window.location.href = 'login.html';
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            if (checkAuthentication()) {
+                initializeSliders();
+                loadCounters();
+                initializeChart();
+                initializePathwayIntegration();
+                updateBilling();
+            }
+        });
+
+        // Initialize Pathway integration
+        function initializePathwayIntegration() {
+            const refreshBtn = document.getElementById('refreshPathway');
+            if (refreshBtn) {
+                refreshBtn.addEventListener('click', refreshPathwayData);
+            }
+        }
+
+        // Initialize slider value displays
+        function initializeSliders() {
+            const hiresSlider = document.getElementById('hires');
+            const priceIncreaseSlider = document.getElementById('priceIncrease');
+            
+            hiresSlider.addEventListener('input', function() {
+                document.getElementById('hiresValue').textContent = this.value;
+            });
+            
+            priceIncreaseSlider.addEventListener('input', function() {
+                document.getElementById('priceIncreaseValue').textContent = this.value + '%';
+            });
+            
+            // Initialize domain selector
+            const domainSelector = document.getElementById('domainType');
+            if (domainSelector) {
+                domainSelector.addEventListener('change', updateLabelsForDomain);
+                updateLabelsForDomain(); // Initialize on load
+            }
+        }
+        
+        // Update labels based on selected domain
+        function updateLabelsForDomain() {
+            const domain = document.getElementById('domainType').value;
+            const labels = {
+                'startup': {
+                    'hires': 'Additional Staff/Resources (0-10)',
+                    'engineerCost': 'Cost per Additional Resource (₹)',
+                    'marketingExtra': 'Additional Spending (₹)',
+                    'priceIncrease': 'Revenue Change (-50% to +200%)',
+                    'hiresHelp': 'Engineers, developers, or key staff members',
+                    'costHelp': 'Monthly salary or contractor cost per person',
+                    'spendingHelp': 'Marketing, tools, infrastructure, or operational costs',
+                    'revenueHelp': 'Price changes, subscription adjustments, or revenue model changes'
+                },
+                'event': {
+                    'hires': 'Additional Volunteers/Staff (0-10)',
+                    'engineerCost': 'Cost per Volunteer/Staff (₹)',
+                    'marketingExtra': 'Additional Event Spending (₹)',
+                    'priceIncrease': 'Ticket/Revenue Change (-50% to +200%)',
+                    'hiresHelp': 'Event volunteers, coordinators, or support staff',
+                    'costHelp': 'Stipend, food, or compensation per volunteer',
+                    'spendingHelp': 'Venue, equipment, prizes, or event materials',
+                    'revenueHelp': 'Ticket price changes, sponsorship, or revenue adjustments'
+                },
+                'business': {
+                    'hires': 'Additional Employees (0-10)',
+                    'engineerCost': 'Cost per Employee (₹)',
+                    'marketingExtra': 'Additional Business Spending (₹)',
+                    'priceIncrease': 'Price/Revenue Change (-50% to +200%)',
+                    'hiresHelp': 'Sales staff, support team, or operational employees',
+                    'costHelp': 'Monthly salary, benefits, or contractor cost',
+                    'spendingHelp': 'Marketing, equipment, inventory, or operational costs',
+                    'revenueHelp': 'Product/service price changes or revenue adjustments'
+                }
+            };
+            
+            const domainLabels = labels[domain];
+            if (domainLabels) {
+                // Update labels
+                document.querySelector('label[for="hires"]').textContent = domainLabels.hires;
+                document.querySelector('label[for="engineerCost"]').textContent = domainLabels.engineerCost;
+                document.querySelector('label[for="marketingExtra"]').textContent = domainLabels.marketingExtra;
+                document.querySelector('label[for="priceIncrease"]').textContent = domainLabels.priceIncrease;
+                
+                // Update help text
+                document.querySelector('label[for="hires"] + .slider-container + .form-help').textContent = domainLabels.hiresHelp;
+                document.querySelector('label[for="engineerCost"] + .form-input + .form-help').textContent = domainLabels.costHelp;
+                document.querySelector('label[for="marketingExtra"] + .form-input + .form-help').textContent = domainLabels.spendingHelp;
+                document.querySelector('label[for="priceIncrease"] + .slider-container + .form-help').textContent = domainLabels.revenueHelp;
+            }
+        }
+
+        // Initialize Chart.js
+        function initializeChart() {
+            const ctx = document.getElementById('cashFlowChart').getContext('2d');
+            cashFlowChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6', 
+                           'Month 7', 'Month 8', 'Month 9', 'Month 10', 'Month 11', 'Month 12'],
+                    datasets: [{
+                        label: 'Projected Cash Flow',
+                        data: [],
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '12-Month Cash Flow Projection',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return '₹' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Main simulation function
+        function simulateScenario() {
+            // Get input values
+            const startingCash = parseFloat(document.getElementById('startingCash').value);
+            const baseRevenue = parseFloat(document.getElementById('baseRevenue').value);
+            const baseExpenses = parseFloat(document.getElementById('baseExpenses').value);
+            const hires = parseInt(document.getElementById('hires').value);
+            const resourceCost = parseFloat(document.getElementById('engineerCost').value);
+            const marketingExtra = parseFloat(document.getElementById('marketingExtra').value);
+            const priceIncrease = parseFloat(document.getElementById('priceIncrease').value) / 100;
+
+            // Calculate adjusted revenue and expenses
+            const adjustedRevenue = baseRevenue * (1 + priceIncrease);
+            const adjustedExpenses = baseExpenses + (hires * resourceCost) + marketingExtra;
+
+            // Calculate monthly cash flow
+            const monthlyCashFlow = adjustedRevenue - adjustedExpenses;
+            
+            // Generate 12-month projection
+            const projection = [];
+            let currentCash = startingCash;
+            
+            for (let month = 1; month <= 12; month++) {
+                currentCash += monthlyCashFlow;
+                projection.push(currentCash);
+            }
+
+            // Update chart
+            cashFlowChart.data.datasets[0].data = projection;
+            cashFlowChart.update();
+
+            // Calculate runway (months until cash <= 0)
+            let runway = 12;
+            for (let i = 0; i < projection.length; i++) {
+                if (projection[i] <= 0) {
+                    runway = i + 1;
+                    break;
+                }
+            }
+
+            // Update summary stats
+            document.getElementById('runway').textContent = runway + ' months';
+            document.getElementById('cashAfter6Months').textContent = '₹' + projection[5].toLocaleString();
+
+            // Show runway warning if less than 6 months
+            const runwayWarning = document.getElementById('runwayWarning');
+            if (runway <= 6) {
+                runwayWarning.style.display = 'block';
+                runwayWarning.className = runway <= 3 ? 'runway-warning runway-danger' : 'runway-warning';
+            } else {
+                runwayWarning.style.display = 'none';
+            }
+
+            // Store current projection for export
+            currentProjection = {
+                startingCash,
+                baseRevenue,
+                baseExpenses,
+                hires,
+                resourceCost,
+                marketingExtra,
+                priceIncrease: priceIncrease * 100,
+                adjustedRevenue,
+                adjustedExpenses,
+                monthlyCashFlow,
+                projection,
+                runway,
+                cashAfter6Months: projection[5]
+            };
+
+            // Update counters and billing
+            updateCounters('scenario');
+        }
+
+        // Fetch latest data from Pathway (mock implementation)
+        async function fetchLatestData() {
+            try {
+                // Current implementation: fetch from mock_financials.json
+                const response = await fetch('./mock_financials.json');
+                const data = await response.json();
+                
+                // Update input fields with fetched data
+                document.getElementById('startingCash').value = data.startingCash;
+                document.getElementById('baseRevenue').value = data.baseRevenue;
+                document.getElementById('baseExpenses').value = data.baseExpenses;
+                
+                // Auto-run simulation with new data
+                simulateScenario();
+                
+                alert('✅ Latest data fetched and simulation updated!');
+                
+                /* 
+                // TODO: Replace with real Pathway API integration
+                // Example API call structure:
+                const pathwayApiKey = 'your-api-key-here';
+                const response = await fetch('https://api.pathway.com/v1/financials', {
+                    headers: {
+                        'Authorization': `Bearer ${pathwayApiKey}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const pathwayData = await response.json();
+                // Process pathwayData and update inputs accordingly
+                */
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                alert('❌ Error fetching latest data. Using current values.');
+            }
+        }
+
+        // Export report as PDF
+        function exportReport() {
+            if (!currentProjection) {
+                alert('⚠️ Please run a simulation first!');
+                return;
+            }
+
+            // Create new PDF document
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Add title
+            doc.setFontSize(20);
+            doc.text('EcoNomix - Financial Projection Report', 20, 30);
+            
+            // Add generation date
+            doc.setFontSize(12);
+            doc.text(`Generated: ${new Date().toLocaleDateString()}`, 20, 45);
+            
+            // Add input parameters
+            doc.setFontSize(14);
+            doc.text('Input Parameters:', 20, 65);
+            
+            doc.setFontSize(10);
+            let yPos = 80;
+            const inputs = [
+                `Starting Cash: ₹${currentProjection.startingCash.toLocaleString()}`,
+                `Base Revenue: ₹${currentProjection.baseRevenue.toLocaleString()}`,
+                `Base Expenses: ₹${currentProjection.baseExpenses.toLocaleString()}`,
+                `Number of Hires: ${currentProjection.hires}`,
+                `Resource Cost: ₹${currentProjection.resourceCost.toLocaleString()}`,
+                `Marketing Extra: ₹${currentProjection.marketingExtra.toLocaleString()}`,
+                `Price Increase: ${currentProjection.priceIncrease}%`
+            ];
+            
+            inputs.forEach(input => {
+                doc.text(input, 20, yPos);
+                yPos += 10;
+            });
+            
+            // Add summary results
+            doc.setFontSize(14);
+            doc.text('Summary Results:', 20, yPos + 10);
+            
+            doc.setFontSize(10);
+            yPos += 25;
+            const results = [
+                `Runway: ${currentProjection.runway} months`,
+                `Cash after 6 months: ₹${currentProjection.cashAfter6Months.toLocaleString()}`,
+                `Monthly Cash Flow: ₹${currentProjection.monthlyCashFlow.toLocaleString()}`
+            ];
+            
+            results.forEach(result => {
+                doc.text(result, 20, yPos);
+                yPos += 10;
+            });
+            
+            // Add chart (simplified table representation)
+            doc.setFontSize(14);
+            doc.text('Monthly Projections:', 20, yPos + 10);
+            
+            doc.setFontSize(8);
+            yPos += 25;
+            
+            // Create table headers
+            doc.text('Month', 20, yPos);
+            doc.text('Cash Flow', 60, yPos);
+            doc.text('Month', 100, yPos);
+            doc.text('Cash Flow', 140, yPos);
+            
+            yPos += 10;
+            
+            // Add monthly data in two columns
+            for (let i = 0; i < 12; i++) {
+                const month = i + 1;
+                const cash = currentProjection.projection[i];
+                const col = i < 6 ? 0 : 1;
+                const xPos = col === 0 ? 20 : 100;
+                const yOffset = col === 0 ? (i * 8) : ((i - 6) * 8);
+                
+                doc.text(`Month ${month}`, xPos, yPos + yOffset);
+                doc.text(`₹${cash.toLocaleString()}`, xPos + 40, yPos + yOffset);
+            }
+            
+            // Save the PDF
+            doc.save('cfo-helper-report.pdf');
+            
+            // Update counters
+            updateCounters('report');
+            
+            alert('📄 Report exported successfully!');
+        }
+
+        // Reset all counters
+        function resetCounters() {
+            if (confirm('Are you sure you want to reset all counters?')) {
+                localStorage.removeItem('cfoHelperCounters');
+                loadCounters();
+                alert('🔄 Counters reset successfully!');
+            }
+        }
+
+        // Update usage counters
+        function updateCounters(type) {
+            let counters = JSON.parse(localStorage.getItem('cfoHelperCounters') || '{"scenarios": 0, "reports": 0}');
+            
+            if (type === 'scenario') {
+                counters.scenarios++;
+            } else if (type === 'report') {
+                counters.reports++;
+            }
+            
+            localStorage.setItem('cfoHelperCounters', JSON.stringify(counters));
+            loadCounters();
+            updateBilling();
+        }
+
+        // Update Flexprice billing display
+        function updateBilling() {
+            let counters = JSON.parse(localStorage.getItem('cfoHelperCounters') || '{"scenarios": 0, "reports": 0}');
+            
+            const scenariosBilled = counters.scenarios;
+            const reportsBilled = counters.reports;
+            const monthlyBill = (scenariosBilled * 10) + (reportsBilled * 50);
+            
+            document.getElementById('scenariosBilled').textContent = scenariosBilled;
+            document.getElementById('reportsBilled').textContent = reportsBilled;
+            document.getElementById('monthlyBill').textContent = '₹' + monthlyBill;
+        }
+
+        // Pathway integration functionality
+        let pathwayData = null;
+        let lastPathwayUpdate = null;
+
+        async function refreshPathwayData() {
+            const refreshBtn = document.getElementById('refreshPathway');
+            const statusIndicator = document.getElementById('pathwayStatus');
+            const statusText = document.getElementById('pathwayStatusText');
+            const lastUpdated = document.getElementById('lastUpdated');
+            
+            refreshBtn.disabled = true;
+            refreshBtn.textContent = 'Refreshing...';
+            
+            try {
+                // Simulate API call delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Fetch fresh data (mock implementation)
+                const response = await fetch('./mock_financials.json');
+                const data = await response.json();
+                
+                // Add some variation to simulate fresh data
+                pathwayData = {
+                    startingCash: data.startingCash + Math.floor(Math.random() * 50000 - 25000),
+                    baseRevenue: data.baseRevenue + Math.floor(Math.random() * 20000 - 10000),
+                    baseExpenses: data.baseExpenses + Math.floor(Math.random() * 15000 - 7500)
+                };
+                
+                lastPathwayUpdate = new Date();
+                
+                // Update status
+                statusIndicator.className = 'status-indicator fresh';
+                statusText.textContent = 'Fresh Data';
+                lastUpdated.textContent = lastPathwayUpdate.toLocaleString();
+                
+                // Update input fields with fresh data
+                document.getElementById('startingCash').value = pathwayData.startingCash;
+                document.getElementById('baseRevenue').value = pathwayData.baseRevenue;
+                document.getElementById('baseExpenses').value = pathwayData.baseExpenses;
+                
+                // Show notification
+                alert('✅ Fresh data loaded from Pathway! Inputs have been updated.');
+                
+            } catch (error) {
+                console.error('Error fetching Pathway data:', error);
+                alert('❌ Error fetching data from Pathway. Using baseline data.');
+                
+                statusIndicator.className = 'status-indicator baseline';
+                statusText.textContent = 'Baseline Data';
+            } finally {
+                refreshBtn.disabled = false;
+                refreshBtn.textContent = 'Refresh from Pathway';
+            }
+        }
+
+        // Load and display counters
+        function loadCounters() {
+            const counters = JSON.parse(localStorage.getItem('cfoHelperCounters') || '{"scenarios": 0, "reports": 0}');
+            
+            document.getElementById('scenariosRun').textContent = counters.scenarios;
+            document.getElementById('reportsExported').textContent = counters.reports;
+            
+            const totalBilled = (counters.scenarios * 10) + (counters.reports * 50);
+            document.getElementById('totalBilled').textContent = '₹' + totalBilled;
+            
+            // Update billing section
+            updateBilling();
+        }
+    </script>
+</body>
+</html>
